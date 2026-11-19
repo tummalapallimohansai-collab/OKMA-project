@@ -1,12 +1,20 @@
+
+from pathlib import Path
 from ultralytics import YOLO
 
 def main():
-    # Load pretrained YOLOv8 Nano model
+    # Load pretrained YOLOv8 Small model
     model = YOLO("yolov8s.pt")
+
+    # Get project root directory
+    root = Path(__file__).resolve().parents[1]
+
+    # Dataset configuration path
+    data_yaml = root / "datasets" / "helmet_dataset" / "data.yaml"
 
     # Train the model
     model.train(
-        data=r"C:\Users\Mohan Sai\OneDrive\Desktop\OKMA\datasets\helmet_dataset\data.yaml",
+        data=str(data_yaml),
         epochs=50,
         imgsz=640,
         batch=16,
